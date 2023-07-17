@@ -5,4 +5,26 @@
   text-align: center;
 }
 
+.NavBar { 
+  
+  border: 3px solid white;
+}
 
+.NavHeading {
+
+  font-weight: 800;
+  color: aliceblue;
+  padding: 150px;
+}
+
+.articlesbox {
+
+  border: 2px solid red;
+
+}
+
+.imgList {
+  max-height: 200px;
+  padding-top: 30px;
+  margin: 10px;
+}
