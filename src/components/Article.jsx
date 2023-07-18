@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "../App.css";
 import { getArticleById } from "../../Utils/api";
 import dayjs from "dayjs";
+import Comments from "./Comments";
 
 const Article = () => {
   const { article_id } = useParams();
@@ -38,6 +39,7 @@ const Article = () => {
       <p className="created-at">
         Created at: {dayjs(newArticle.created_at).format("MMMM DD, YYYY")}
       </p>
+      <Comments />
     </div>
   );
 };

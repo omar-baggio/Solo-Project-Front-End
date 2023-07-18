@@ -1,7 +1,6 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -31,4 +30,34 @@
 
 .articleTitle {
   color: aliceblue;
+}
+
+.created-at {
+  display: flex;
+  font-size: 12px;
+  margin-top: 1.5px;
+  margin-left: 20.5px;
+  margin-bottom: 50px;
+}
+
+.commentbox {
+
+  
+  background-color: darkslategrey;
+  border-radius: 15px;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+
+}
+
+.commentAuthor{
+ margin-left: 1px;
+  margin-bottom: 1px;
+  color: rgb(151, 242, 242);
+}
+
+.commentBody {
+  margin-top: 1px;
+  
 }

@@ -20,3 +20,11 @@ export const getArticleById = (article_id) => {
     return article;
   });
 };
+
+export const getCommentsByArticleId = (article_id) => {
+  let path = `/articles/${article_id}/comments`;
+
+  return ncNews.get(path, article_id).then(({ data: { comments } }) => {
+    return comments;
+  });
+};
