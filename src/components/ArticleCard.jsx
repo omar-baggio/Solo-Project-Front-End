@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 const ArticleCard = ({ article }) => {
   return (
     <section key={article.article_id} className="articlesbox">
-      <h2>{article.title}</h2>
+      <Link className="articleTitle" to={`${article.article_id}`}>
+        <h2>{article.title}</h2>
+      </Link>
 
       <img className="imgList" src={article.article_img_url} alt="" />
       <p>created at: {article.created_at}</p>
