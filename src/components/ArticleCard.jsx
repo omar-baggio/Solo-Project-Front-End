@@ -6,9 +6,9 @@ const ArticleCard = ({ article }) => {
     <section key={article.article_id} className="articlesbox">
       <Link className="articleTitle" to={`${article.article_id}`}>
         <h2>{article.title}</h2>
+        <img className="imgList" src={article.article_img_url} alt="" />
       </Link>
 
-      <img className="imgList" src={article.article_img_url} alt="" />
       <p>created at: {article.created_at}</p>
       <p>Topic: {article.topic}</p>
       <p>Author: {article.author}</p>
