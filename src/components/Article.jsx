@@ -2,12 +2,13 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../App.css";
 import { getArticleById } from "../../Utils/api";
+import dayjs from "dayjs";
 
 const Article = () => {
   const { article_id } = useParams();
 
   const [newArticle, setNewArticle] = useState({});
-  const [isloading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const Article = () => {
       });
   }, []);
 
-  if (isloading) {
+  if (isLoading) {
     return <p>Loading...</p>;
   }
 
@@ -29,12 +30,14 @@ const Article = () => {
     <div className="singleArticle">
       <h1>{newArticle.title}</h1>
       <h2>Topic: {newArticle.topic} </h2>
-      <img src={newArticle.article_img_url} />
+      <img className="imgArticle" src={newArticle.article_img_url} />
       <p>
-        Item details <br />
+        <br />
         {newArticle.body}
       </p>
-      <p>Created at:{newArticle.created_at}</p>
+      <p className="created-at">
+        Created at: {dayjs(newArticle.created_at).format("MMMM DD, YYYY")}
+      </p>
     </div>
   );
 };
