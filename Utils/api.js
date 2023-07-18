@@ -12,3 +12,11 @@ export const getArticles = () => {
     return articles;
   });
 };
+
+export const getArticleById = (article_id) => {
+  let path = `/articles/${article_id}`;
+
+  return ncNews.get(path, article_id).then(({ data: { article } }) => {
+    return article;
+  });
+};

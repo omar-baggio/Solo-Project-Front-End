@@ -4,6 +4,7 @@ import "./App.css";
 import ArticlesList from "./components/ArticlesList";
 import Topics from "./components/Topics";
 import Users from "./components/Users";
+import Article from "./components/Article";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -29,6 +30,7 @@ function App() {
         <Route path="/articles" element={<ArticlesList />} />
         <Route path="/topics" element={<Topics />} />
         <Route path="/users" element={<Users />} />
+        <Route path="/articles/:article_id" element={<Article />} />
       </Routes>
     </div>
   );
