@@ -1,31 +1,38 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "../../Utils/api";
+import ArticleCard from "./ArticleCard";
 
 const ArticlesList = () => {
   const [articles, setArticles] = useState([]);
+  const [isloading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    getArticles().then((dataFromApi) => {
-      console.log(dataFromApi, "<--- articles in articleList");
-      setArticles(dataFromApi);
-    });
+    getArticles()
+      .then((dataFromApi) => {
+        setArticles(dataFromApi);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsError(true);
+      });
   }, []);
+
+  if (isloading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
-      <h1>Article List</h1>;
-      {articles.map((article) => {
-        return (
-          <section key={article.article_id} className="articlesbox">
-            <h2> {article.title}</h2>
-            <img className="imgList" src={article.article_img_url} />
-            <p>created at: {article.created_at}</p>
-            <p>Topic: {article.topic}</p>
-            <p>Author: {article.author}</p>
-            <p>Comments count: {article.comment_count}</p>
-          </section>
-        );
-      })}
+      <h1>Article List</h1>
+
+      {isError ? (
+        <p>Error! Please try again</p>
+      ) : (
+        articles.map((article) => (
+          <ArticleCard key={article.article_id} article={article} />
+        ))
+      )}
     </>
   );
 };
