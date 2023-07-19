@@ -9,15 +9,29 @@ const Votes = ({ newArticle }) => {
 
   const updateVotes = (changeValue) => {
     if (voteChange === 0) {
-      patchArticle(newArticle.article_id, changeValue);
-      setNewVotes(newVotes + changeValue);
-      setVoteChange(changeValue);
-      setErr(null);
+      patchArticle(newArticle.article_id, changeValue)
+        .then(() => {
+          setNewVotes(newVotes + changeValue);
+          setVoteChange(changeValue);
+          setErr(null);
+        })
+        .catch((error) => {
+          setNewVotes(newVotes);
+          setVoteChange(0);
+          setErr("Something went wrong, please try again.");
+        });
     } else if (voteChange === changeValue) {
-      patchArticle(newArticle.article_id, -changeValue);
-      setNewVotes(newVotes - changeValue);
-      setVoteChange(0);
-      setErr("Something went wrong, please try again.");
+      patchArticle(newArticle.article_id, -changeValue)
+        .then(() => {
+          setNewVotes(newVotes - changeValue);
+          setVoteChange(0);
+          setErr("Something went wrong, please try again.");
+        })
+        .catch((error) => {
+          setNewVotes(newVotes);
+          setVoteChange(0);
+          setErr("Something went wrong, please try again.");
+        });
     }
   };
 
@@ -36,6 +50,7 @@ const Votes = ({ newArticle }) => {
         {" "}
         -{" "}
       </button>
+      {err && <p>{err}</p>}
     </div>
   );
 };
