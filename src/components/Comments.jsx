@@ -32,8 +32,8 @@ const Comments = () => {
       {isError ? (
         <p>No comments yet</p>
       ) : (
-        comments.map((comment) => (
-          <Comment key={comment.comment_id} comment={comment} />
+        comments.map((comment, index) => (
+          <Comment key={comment.comment_id} comment={comment} index={index} />
         ))
       )}
     </div>

@@ -33,7 +33,7 @@ const Article = () => {
       <h1>{newArticle.title}</h1>
       <h2>Topic: {newArticle.topic} </h2>
       <img className="imgArticle" src={newArticle.article_img_url} />
-      <Votes />
+      <Votes newArticle={newArticle} />
       <p>
         <br />
         {newArticle.body}
