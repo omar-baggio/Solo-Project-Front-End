@@ -2,10 +2,10 @@ import React from "react";
 import "../App.css";
 import dayjs from "dayjs";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, index }) => {
   return (
     <>
-      <section key={comment.comment_id} className="commentbox">
+      <section key={index} className="commentbox">
         <h4 className="commentAuthor">{comment.author}</h4>
         <br />
         <br />

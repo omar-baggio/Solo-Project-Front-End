@@ -4,6 +4,7 @@ import "../App.css";
 import { getArticleById } from "../../Utils/api";
 import dayjs from "dayjs";
 import Comments from "./Comments";
+import Votes from "./Votes";
 
 const Article = () => {
   const { article_id } = useParams();
@@ -32,6 +33,7 @@ const Article = () => {
       <h1>{newArticle.title}</h1>
       <h2>Topic: {newArticle.topic} </h2>
       <img className="imgArticle" src={newArticle.article_img_url} />
+      <Votes newArticle={newArticle} />
       <p>
         <br />
         {newArticle.body}
@@ -39,6 +41,7 @@ const Article = () => {
       <p className="created-at">
         Created at: {dayjs(newArticle.created_at).format("MMMM DD, YYYY")}
       </p>
+
       <Comments />
     </div>
   );

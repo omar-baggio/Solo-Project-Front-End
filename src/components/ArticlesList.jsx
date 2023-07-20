@@ -17,7 +17,6 @@ const ArticlesList = () => {
         setIsError(true);
       });
   }, []);
-
   if (isloading) {
     return <p>Loading...</p>;
   }

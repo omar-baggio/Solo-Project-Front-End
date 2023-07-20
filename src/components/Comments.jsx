@@ -10,8 +10,6 @@ const Comments = () => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(comments, "<-- comments");
-
   useEffect(() => {
     getCommentsByArticleId(article_id)
       .then((dataFromApi) => {
@@ -32,10 +30,10 @@ const Comments = () => {
       <h3>Comments</h3>
 
       {isError ? (
-        <p>Error! Please try again</p>
+        <p>No comments yet</p>
       ) : (
-        comments.map((comment) => (
-          <Comment key={comment.comment_id} comment={comment} />
+        comments.map((comment, index) => (
+          <Comment key={comment.comment_id} comment={comment} index={index} />
         ))
       )}
     </div>

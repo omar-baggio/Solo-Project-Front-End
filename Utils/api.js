@@ -28,3 +28,15 @@ export const getCommentsByArticleId = (article_id) => {
     return comments;
   });
 };
+
+export const patchArticle = (article_id, changeNumber) => {
+  let path = `/articles/${article_id}`;
+
+  const patchBody = {
+    inc_votes: changeNumber,
+  };
+
+  return ncNews.patch(path, patchBody).then(({ data }) => {
+    return data;
+  });
+};
