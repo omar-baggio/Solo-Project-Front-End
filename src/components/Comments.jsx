@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { getCommentsByArticleId } from "../../Utils/api";
 import { useEffect, useState } from "react";
 import Comment from "./Comment";
+import AddComment from "./AddComment";
 
 const Comments = () => {
   const { article_id } = useParams();
@@ -28,6 +29,8 @@ const Comments = () => {
   return (
     <div className="commentsBox">
       <h3>Comments</h3>
+
+      <AddComment setComments={setComments} />
 
       {isError ? (
         <p>No comments yet</p>

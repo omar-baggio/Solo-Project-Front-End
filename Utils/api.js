@@ -40,3 +40,13 @@ export const patchArticle = (article_id, changeNumber) => {
     return data;
   });
 };
+
+export const postComment = ({ username, body }, article_id) => {
+  let path = `/articles/${article_id}/comments`;
+
+  const postBody = { username: username, body: body };
+
+  return ncNews.post(path, postBody).then(({ data }) => {
+    return data;
+  });
+};
