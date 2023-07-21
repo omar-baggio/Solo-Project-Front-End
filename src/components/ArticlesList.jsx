@@ -4,7 +4,7 @@ import ArticleCard from "./ArticleCard";
 
 const ArticlesList = () => {
   const [articles, setArticles] = useState([]);
-  const [isloading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const ArticlesList = () => {
         setIsError(true);
       });
   }, []);
-  if (isloading) {
+  if (isLoading) {
     return <p>Loading...</p>;
   }
 
