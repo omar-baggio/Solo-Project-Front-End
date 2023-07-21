@@ -18,14 +18,12 @@ const Votes = ({ newArticle }) => {
         .catch((error) => {
           setNewVotes(newVotes);
           setVoteChange(0);
-          setErr("Something went wrong, please try again.");
         });
     } else if (voteChange === changeValue) {
       patchArticle(newArticle.article_id, -changeValue)
         .then(() => {
           setNewVotes(newVotes - changeValue);
           setVoteChange(0);
-          setErr("Something went wrong, please try again.");
         })
         .catch((error) => {
           setNewVotes(newVotes);

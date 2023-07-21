@@ -1,46 +1,55 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { postComment } from "../../Utils/api";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import UserContext from "../Context/UserContext";
 
 const AddComment = ({ setComments }) => {
+  const navigate = useNavigate();
   const { article_id } = useParams();
   const [error, setError] = useState(null);
-  const [addComment, setAddComment] = useState({
-    username: "",
-    body: "",
-  });
+  const [newComment, setNewComment] = useState("");
+  const { loggedInUser, isLoggedIn, handlePrevPath } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment(addComment, article_id)
+    postComment(newComment, article_id, loggedInUser.username)
       .then((commentFromApi) => {
-        setComments((currentComment) => [...currentComment, commentFromApi]);
+        setComments((currentComment) => [commentFromApi, ...currentComment]);
+        setNewComment("");
+        setError(null);
       })
       .catch((error) => {
         setError("Something went wrong, please try again.");
       });
   };
+
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>Add Comment</label>
-        <input
-          placeholder="User Name"
-          value={addComment.username}
-          onChange={(e) =>
-            setAddComment({ ...addComment, username: e.target.value })
-          }
-        ></input>
-        <input
-          placeholder="Body"
-          value={addComment.body}
-          onChange={(e) =>
-            setAddComment({ ...addComment, body: e.target.value })
-          }
-        ></input>
-        <button>Add Comment</button>
-        {error && <p>{error}</p>}
-      </form>
+      {isLoggedIn ? (
+        <form onSubmit={handleSubmit}>
+          <label>Add Comment</label>
+          <textarea
+            placeholder="Write your comment"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+          ></textarea>
+          <br />
+          <br />
+          <br />
+          <button>Add Comment</button>
+        </form>
+      ) : (
+        <section>
+          <button
+            onClick={() => {
+              handlePrevPath(window.location.pathname);
+              navigate("/users");
+            }}
+          >
+            Sign IN to COMMENT!
+          </button>
+        </section>
+      )}
     </div>
   );
 };

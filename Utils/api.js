@@ -41,12 +41,20 @@ export const patchArticle = (article_id, changeNumber) => {
   });
 };
 
-export const postComment = ({ username, body }, article_id) => {
+export const postComment = (newComment, article_id, username) => {
   let path = `/articles/${article_id}/comments`;
 
-  const postBody = { username: username, body: body };
+  const postBody = { username: username, body: newComment };
 
   return ncNews.post(path, postBody).then(({ data }) => {
     return data;
+  });
+};
+
+export const getUsers = () => {
+  let path = "/users";
+  return ncNews.get(path).then(({ data: { users } }) => {
+    console.log(users, "users in api");
+    return users;
   });
 };

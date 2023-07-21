@@ -7,8 +7,6 @@ import Users from "./components/Users";
 import Article from "./components/Article";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div>
       <h1> NC News </h1>

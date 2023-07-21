@@ -20,14 +20,14 @@ const Comments = () => {
       .catch((error) => {
         setIsError(true);
       });
-  }, []);
+  }, [article_id]);
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
   return (
-    <div className="commentsBox">
+    <div className="commentsBox" key={comments.comment_id}>
       <h3>Comments</h3>
 
       <AddComment setComments={setComments} />
@@ -36,7 +36,7 @@ const Comments = () => {
         <p>No comments yet</p>
       ) : (
         comments.map((comment, index) => (
-          <Comment key={comment.comment_id} comment={comment} index={index} />
+          <Comment key={index} comment={comment} />
         ))
       )}
     </div>
