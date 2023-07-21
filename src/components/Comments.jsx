@@ -31,7 +31,6 @@ const Comments = () => {
       <h3>Comments</h3>
 
       <AddComment setComments={setComments} />
-
       {isError ? (
         <p>No comments yet</p>
       ) : (

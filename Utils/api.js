@@ -47,14 +47,14 @@ export const postComment = (newComment, article_id, username) => {
   const postBody = { username: username, body: newComment };
 
   return ncNews.post(path, postBody).then(({ data }) => {
-    return data;
+    console.log(data.comment, "<<<<<data");
+    return data.comment;
   });
 };
 
 export const getUsers = () => {
   let path = "/users";
   return ncNews.get(path).then(({ data: { users } }) => {
-    console.log(users, "users in api");
     return users;
   });
 };

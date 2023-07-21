@@ -7,6 +7,7 @@ const AddComment = ({ setComments }) => {
   const navigate = useNavigate();
   const { article_id } = useParams();
   const [error, setError] = useState(null);
+  const [disable, setDisable] = useState(0);
   const [newComment, setNewComment] = useState("");
   const { loggedInUser, isLoggedIn, handlePrevPath } = useContext(UserContext);
 
@@ -14,8 +15,12 @@ const AddComment = ({ setComments }) => {
     e.preventDefault();
     postComment(newComment, article_id, loggedInUser.username)
       .then((commentFromApi) => {
-        setComments((currentComment) => [commentFromApi, ...currentComment]);
+        setComments((currentComments) => {
+          return [commentFromApi, ...currentComments];
+        });
+
         setNewComment("");
+        setDisable(true);
         setError(null);
       })
       .catch((error) => {
@@ -25,6 +30,7 @@ const AddComment = ({ setComments }) => {
 
   return (
     <div>
+      {error && <p>{error}</p>}
       {isLoggedIn ? (
         <form onSubmit={handleSubmit}>
           <label>Add Comment</label>
@@ -36,7 +42,7 @@ const AddComment = ({ setComments }) => {
           <br />
           <br />
           <br />
-          <button>Add Comment</button>
+          <button disabled={disable}>Add Comment</button>
         </form>
       ) : (
         <section>
