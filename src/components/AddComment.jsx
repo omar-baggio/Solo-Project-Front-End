@@ -10,9 +10,14 @@ const AddComment = ({ setComments }) => {
   const [disable, setDisable] = useState(0);
   const [newComment, setNewComment] = useState("");
   const { loggedInUser, isLoggedIn, handlePrevPath } = useContext(UserContext);
+  const [errMsg, setErrMsg] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (newComment.length === 0) {
+      setErrMsg(true);
+      return "";
+    }
     postComment(newComment, article_id, loggedInUser.username)
       .then((commentFromApi) => {
         setComments((currentComments) => {
@@ -33,6 +38,14 @@ const AddComment = ({ setComments }) => {
       {error && <p>{error}</p>}
       {isLoggedIn ? (
         <form onSubmit={handleSubmit}>
+          <br />
+          <br />
+          <br />
+          {errMsg && newComment.length <= 0 ? (
+            <label> Can't Post an empty comment</label>
+          ) : (
+            ""
+          )}
           <label>Add Comment</label>
           <textarea
             placeholder="Write your comment"
@@ -42,7 +55,7 @@ const AddComment = ({ setComments }) => {
           <br />
           <br />
           <br />
-          <button disabled={disable}>Add Comment</button>
+          <button>Add Comment</button>
         </form>
       ) : (
         <section>

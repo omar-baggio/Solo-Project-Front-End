@@ -47,7 +47,6 @@ export const postComment = (newComment, article_id, username) => {
   const postBody = { username: username, body: newComment };
 
   return ncNews.post(path, postBody).then(({ data }) => {
-    console.log(data.comment, "<<<<<data");
     return data.comment;
   });
 };
